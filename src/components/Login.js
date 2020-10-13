@@ -1,45 +1,37 @@
-import React, { Component } from 'react';
-import {localStorage} from 'local-storage';
-import { createBrowserHistory as history} from 'history';
+import React, { Component,useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-class Login extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            user:'',
-            password:''
-        };
+export default function Login(){
+    const [username,setUsername]=useState('');
+    const [password,setPassword]=useState('');
+    function handleUserNameChange(e){
+        setUsername(e.target.value);
     }
-    
-    handleChange=(event)=>{
-         let user=event.target.name;
-         let password=event.target.value;
-         this.setState({[user]:password});
+    function handlePasswordChange(e){
+        setPassword(e.target.value);
     }
-    handleFormSubmit=()=>{
-        const{user,password}=this.state;
-        localStorage.setItem('user',user);
-        localStorage.setItem('password',password);
+    return(
+        <section>
+            <label >
+                UserName:
+             <input
+             value={username}
+             onChange={handleUserNameChange}
+             />
+             </label>
+            
+            < label >
+            Password:
+             <input
+             value={password}
+             onChange={handlePasswordChange}
+             />
+             </ label>
+             <Link to="/Welcome">Login</Link>
+            
+        </section>
+    );
 
-
-    }
-    
-    render(){
-        return(
-            <form onSubmit={this.handleFormSubmit}>
-                <label>
-                    User:<input type="text" name="user" value={this.state.user} onChange={this.handleChange}  />
-                </label>
-                <label>
-                Password:<input type="text" name="password" value={this.state.password} onChange={this.handleChange} />
-                </label>
-                {/* <button type="submit" onClick={() => history.push('/Welcome')}>Log In</button> */}
-                <Link to="/Welcome">Login</Link>
-
-            </form>
-
-        );
-    }
 }
-export default Login;
+
+  

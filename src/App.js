@@ -4,36 +4,27 @@ import Navigation from './components/Navigation';
 import Login from './components/Login';
 import Welcome from './components/Welcome';
 import { Divider } from 'material-ui';
+import Error from './components/Error';
  
- 
-
-
-
-class App extends Component{
-  render(){
-    return(
-      <div>
-        <BrowserRouter>
-        {/* <ul>
-          <li>
-            <Link to ="/Login"></Link>
-          </li>
-          <li>
-            <Link to="/Welcome"></Link>
-          </li>
-        </ul> */}
-        <Switch>
-          <Route exact path="/" component={Login}/> 
-          <Route exact path="/Welcome" component={Welcome}/>
-        </Switch>
-        </BrowserRouter>
-
-      </div>
+function App() {
+  return (
+  <BrowserRouter>
+  
+  <Switch>
+    <Route exact path="/" component={Login}/> 
+    <Route exact path="/Welcome" component={Welcome}/>
+    <Route path="**" component={Error}/>
+    
+  </Switch>
+  </BrowserRouter>
      
-    );
-  }
+  );
 }
-
 export default App;
+
+
+ 
+
+
     
 

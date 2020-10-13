@@ -1,18 +1,14 @@
-import React, {Component } from 'react';
-import localStorage from 'local-storage';
-class Welcome extends Component{
-    state={
-        user:''
-        };
-    componentDidMount() {
-        const user = localStorage.getItem('user');
+import React, {Component,useEffect, useState } from 'react';
+export default function Welcome(){
+    const [username,setUserName]=useState('')
+    useEffect(() => {
          
-        this.setState({ user});
-      }
-      render(){
-          return(
-          <h1>welcome {this.state.user}</h1>
-          )
-      }
+    });
+return(
+    <section>
+        <h1>Welcome {username}</h1>
+    
+    </section>
+);
 }
-export default Welcome;
+ 
