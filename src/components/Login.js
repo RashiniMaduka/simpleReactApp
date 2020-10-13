@@ -1,8 +1,8 @@
 import React, { Component,useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Login(){
-    const [username,setUsername]=useState('');
+export default function Login({username,setUsername}){
+      
     const [password,setPassword]=useState('');
     function handleUserNameChange(e){
         setUsername(e.target.value);
@@ -15,7 +15,7 @@ export default function Login(){
             <label >
                 UserName:
              <input
-             value={username}
+             value={ username}
              onChange={handleUserNameChange}
              />
              </label>
