@@ -1,9 +1,9 @@
-import React, { Component,useState, } from "react";
-import { BrowserRouter, Route, Switch, Router, Link } from "react-router-dom";
-import Navigation from "./components/Navigation";
+import React, { useState, } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+ 
 import Login from "./components/Login";
 import Welcome from "./components/Welcome";
-import { Divider } from "material-ui";
+ 
 import Error from "./components/Error";
 
 function App() {
