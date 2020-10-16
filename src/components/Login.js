@@ -1,37 +1,49 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
-export default function Login({username,setUsername}){
-      
-    const [password,setPassword]=useState('');
-    function handleUserNameChange(e){
-        setUsername(e.target.value);
+export default function Login({ username, setUsername }) {
+  let history = useHistory();
+  const [title, setTitle] = useState("");
+  const [password, setPassword] = useState("");
+  function handleUserNameChange(e) {
+    setUsername(e.target.value);
+  }
+  function handlePasswordChange(e) {
+    setPassword(e.target.value);
+  }
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todos/" + username)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setTitle(result.title);
+          console.log(title);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  });
+  function activeWelcome() {
+    if (title === password) {
+      window.open("/Welcome");
+    } else {
+      console.log("no route");
     }
-    function handlePasswordChange(e){
-        setPassword(e.target.value);
-    }
-    return(
-        <section>
-            <label >
-                UserName:
-             <input
-             value={ username}
-             onChange={handleUserNameChange}
-             />
-             </label>
-            
-            < label >
-            Password:
-             <input
-             value={password}
-             onChange={handlePasswordChange}
-             />
-             </ label>
-             <Link to="/Welcome">Login</Link>
-            
-        </section>
-    );
+  }
 
+  return (
+    <section>
+      <label>
+        UserName:
+        <input value={username} onChange={handleUserNameChange} />
+      </label>
+
+      <label>
+        Password:
+        <input value={password} onChange={handlePasswordChange} />
+      </label>
+      <button onClick={activeWelcome}>Login</button>
+    </section>
+  );
 }
-
-  
