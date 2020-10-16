@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 
-export default function Login({ username, setUsername }) {
-  let history = useHistory();
-  const [title, setTitle] = useState("");
+export default function Login() {
+  const [username, setUsername] = useState("");
+  const [status, setStatus] = useState("");
   const [password, setPassword] = useState("");
   function handleUserNameChange(e) {
     setUsername(e.target.value);
@@ -13,20 +12,29 @@ export default function Login({ username, setUsername }) {
   }
 
   function activeWelcome() {
-    fetch("https://jsonplaceholder.typicode.com/todos/" + username)
+    fetch(
+      "https://d7tbmlp4xb.execute-api.us-west-2.amazonaws.com/dev/logintest",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then(
         (result) => {
-          setTitle(result.title);
-          console.log(title);
+          setStatus(result.success);
+          console.log(status);
         },
         (error) => {
           console.log(error);
         }
       );
 
-    if (title === password) {
-      window.open("/Welcome");
+    if (status === true) {
+      window.open("/Welcome/" + username);
     } else {
       console.log("no route");
     }
