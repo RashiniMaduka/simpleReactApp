@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export default function Login({ username, setUsername }) {
@@ -11,7 +11,8 @@ export default function Login({ username, setUsername }) {
   function handlePasswordChange(e) {
     setPassword(e.target.value);
   }
-  useEffect(() => {
+
+  function activeWelcome() {
     fetch("https://jsonplaceholder.typicode.com/todos/" + username)
       .then((res) => res.json())
       .then(
@@ -23,8 +24,7 @@ export default function Login({ username, setUsername }) {
           console.log(error);
         }
       );
-  });
-  function activeWelcome() {
+
     if (title === password) {
       window.open("/Welcome");
     } else {
