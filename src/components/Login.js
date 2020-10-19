@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
+  const history = useHistory();
   const [username, setUsername] = useState("");
   const [status, setStatus] = useState("");
   const [password, setPassword] = useState("");
@@ -10,6 +13,15 @@ export default function Login() {
   function handlePasswordChange(e) {
     setPassword(e.target.value);
   }
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await axios(
+  //       "https://d7tbmlp4xb.execute-api.us-west-2.amazonaws.com/dev/logintest"
+  //     );
+  //     setStatus(result.success);
+  //   };
+  //   fetchData();
+  // }, []);
 
   function activeWelcome() {
     fetch(
@@ -34,7 +46,7 @@ export default function Login() {
       );
 
     if (status === true) {
-      window.open("/Welcome/" + username);
+      history.push("/Welcome" );
     } else {
       console.log("no route");
     }
@@ -51,7 +63,9 @@ export default function Login() {
         Password:
         <input value={password} onChange={handlePasswordChange} />
       </label>
-      <button onClick={activeWelcome}>Login</button>
+      <button type="button" onClick={activeWelcome}>
+        Login
+      </button>
     </section>
   );
 }
